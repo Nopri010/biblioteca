@@ -86,7 +86,7 @@ public class Main {
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); // espera o usuário dar um enter para continuar
+        input.nextLine(); 
     }
 
     private static void pesquisar() {
@@ -105,7 +105,7 @@ public class Main {
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); // espera o usuário dar um enter para continuar
+        input.nextLine(); 
     }
 
     private static void remover() {
@@ -120,7 +120,7 @@ public class Main {
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); // espera o usuário dar um enter para continuar
+        input.nextLine(); 
     }
 
     public static void main(String[] args) {
