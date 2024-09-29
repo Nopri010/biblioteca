@@ -26,21 +26,25 @@ public class Main {
     }
 
     private static void limparTela() {
-        // Limpar a tela (método simples para console)
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     private static void listar() {
         List<Livro> livros = biblio.pesquisarTodos();
-        livros.sort(Comparator.comparing(Livro::getTitulo));
 
+        if (livros.isEmpty()) {
+            System.out.println("Nenhum livro encontrado.");
+            return;
+        }
+
+        livros.sort(Comparator.comparing(Livro::getTitulo));
         System.out.println("======== LISTA DE LIVROS =========");
         for (Livro livro : livros) {
             System.out.println("Título: " + livro.getTitulo());
             System.out.println("Autor: " + livro.getAutor());
-            System.out.println("Ano: " + livro.getAnoPublicacao());
-            System.out.println("N. Páginas: " + livro.getnPaginas());
+            System.out.println("Ano de Publicação: " + livro.getAnoPublicacao());
+            System.out.println("Número de Páginas: " + livro.getnPaginas());
             System.out.println("-----------------------------------");
         }
     }
@@ -86,26 +90,29 @@ public class Main {
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); 
+        input.nextLine();
     }
 
     private static void pesquisar() {
         System.out.print("Informe o título do livro a ser pesquisado: ");
         String titulo = input.nextLine();
-        Livro livro = biblio.pesquisarPorTitulo(titulo);
+        List<Livro> livros = biblio.pesquisarPorTitulo(titulo);
 
-        if (livro != null) {
-            System.out.println("Livro encontrado!");
-            System.out.println("Título: " + livro.getTitulo());
-            System.out.println("Autor: " + livro.getAutor());
-            System.out.println("Ano: " + livro.getAnoPublicacao());
-            System.out.println("N. Páginas: " + livro.getnPaginas());
+        if (!livros.isEmpty()) {
+            System.out.println("Livros encontrados:");
+            for (Livro livro : livros) {
+                System.out.println("Título: " + livro.getTitulo());
+                System.out.println("Autor: " + livro.getAutor());
+                System.out.println("Ano de Publicação: " + livro.getAnoPublicacao());
+                System.out.println("Número de Páginas: " + livro.getnPaginas());
+                System.out.println("-----------------------------------");
+            }
         } else {
-            System.out.println("Livro não encontrado.");
+            System.out.println("Nenhum livro encontrado com esse título.");
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); 
+        input.nextLine();
     }
 
     private static void remover() {
@@ -113,26 +120,24 @@ public class Main {
         String titulo = input.nextLine();
 
         try {
-            biblio.remover(titulo);
+            biblio.removerPorTitulo(titulo);
             System.out.println("Livro removido com sucesso!");
         } catch (Exception e) {
             System.out.println("ERRO: " + e.getMessage());
         }
 
         System.out.println("Pressione ENTER para continuar...");
-        input.nextLine(); 
+        input.nextLine();
     }
 
     public static void main(String[] args) {
-        String menu = """
-                SISTEMA DE GERENCIAMENTO DE BIBLIOTECA
-                Escolha uma das opções:
-                1 - Adicionar novo livro;
-                2 - Listar todos os livros;
-                3 - Pesquisar livro;
-                4 - Remover livro;
-                0 - Sair;
-                """;
+        String menu = "SISTEMA DE GERENCIAMENTO DE BIBLIOTECA\n"
+        + "Escolha uma das opções:\n"
+        + "1 - Adicionar novo livro;\n"
+        + "2 - Listar todos os livros;\n"
+        + "3 - Pesquisar livro;\n"
+        + "4 - Remover livro;\n"
+        + "0 - Sair;\n";
         int opcao;
         do {
             limparTela();
