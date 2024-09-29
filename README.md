@@ -34,6 +34,8 @@ Trocar ideias com seus colegas e explorar recursos na internet são sempre boas 
 
 RA Alunos:
 
+Leonardo Ross Dapper 1136153
+
 Alex Gonçalves 1136919
 
 Gabriel Grasik 1136052
